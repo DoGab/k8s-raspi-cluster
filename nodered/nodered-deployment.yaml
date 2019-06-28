@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nodered
+  name: nodered
+  namespace: homeautomation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodered
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nodered
+    spec:
+      containers:
+      - image: nodered/node-red-docker
+        name: node-red-docker
+        resources: {}
+        volumeMounts:
+        - mountPath: "/data"
+          name: mypd
+      volumes:
+      - name: mypd
+        persistentVolumeClaim:
+          claimName: noderedstorage-claim
+status: {}

@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gollum
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: wiki.gabnetwork.ch
+    http:
+      paths:
+      - backend:
+          serviceName: gollum
+          servicePort: 8000

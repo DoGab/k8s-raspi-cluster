@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nodered
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  namespace: homeautomation
+spec:
+  rules:
+  - host: nodered.gabnetwork.ch
+    http:
+      paths:
+      - backend:
+          serviceName: nodered
+          servicePort: 1880

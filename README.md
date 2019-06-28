@@ -147,7 +147,7 @@ k8minion2   Ready    <none>   7h53m   v1.15.0
 
 **Yaayy!** The Kubernetes Cluster is now ready to deploy some software!
 
-## Cluster Sotware Deployment
+## Cluster Software Deployment
 
 ### Create a Deployment
 

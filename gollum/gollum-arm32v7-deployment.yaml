@@ -19,7 +19,7 @@ spec:
         app: gollum
     spec:
       containers:
-      - image: dogab/docker-gollum
+      - image: dogab/docker-gollum:v1
         name: docker-gollum
         resources: {}
 status: {}

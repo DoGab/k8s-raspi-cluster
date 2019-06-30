@@ -5,6 +5,7 @@ metadata:
   labels:
     app: gollum
   name: gollum
+  namespace: wiki
 spec:
   ports:
   - port: 8000

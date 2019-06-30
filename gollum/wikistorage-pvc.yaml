@@ -2,6 +2,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: wikistorage-claim
+  namespace: wiki
 spec:
   storageClassName: slow
   volumeMode: Filesystem

@@ -19,15 +19,7 @@ spec:
         app: gollum
     spec:
       containers:
-      - image: winkapp/docker-gollum
+      - image: dogab/docker-gollum
         name: docker-gollum
         resources: {}
-        args: ["--allow-uploads=page", "--live-preview"]
-        volumeMounts:
-        - mountPath: "/root/wikidata"
-          name: mypd
-      volumes:
-      - name: mypd
-        persistentVolumeClaim:
-          claimName: wikistorage-claim
 status: {}

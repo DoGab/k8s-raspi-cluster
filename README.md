@@ -77,7 +77,7 @@ $ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 It will take several minutes until you get an output. Once the command has finished your output should look similar to this:
 
 ```bash
-pi@k8master:~ $ sudo kubeadm init
+pi@k8master:~ $ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 [init] Using Kubernetes version: v1.15.0
 ...
 Your Kubernetes control-plane has initialized successfully!
@@ -113,12 +113,6 @@ NAME       STATUS     ROLES    AGE    VERSION
 k8master   NotReady   master   2m1s   v1.15.0
 ```
 
-#### Install a Network plugin
-Install a network plugin on the master raspberry pi. Choose one from the list here: https://kubernetes.io/docs/concepts/cluster-administration/addons/. I'm going to use `flannel` as the network plugin.
-```bash
-pi@k8master:~ $ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
-```
-
 ### Install worker nodes
 Join the worker nodes into the cluster. To do so run the following command on every node you want to join.
 ```bash
@@ -136,20 +130,60 @@ This node has joined the cluster:
 Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
 ```
 
-After you have run that command on all your worker nodes you should see them by running `kubectl get nodes` on the master.
+### Install a Network plugin
+Install a network plugin on the master raspberry pi. Choose one from the list here: https://kubernetes.io/docs/concepts/cluster-administration/addons/. I'm going to use `flannel` as the network plugin.
+```bash
+pi@k8master:~ $ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
+```
+
+After you have run that command on them master you should see all nodes getting ready by running `kubectl get nodes`.
 ```bash
 pi@k8master:~ $ kubectl get nodes
 NAME        STATUS   ROLES    AGE     VERSION
-k8master    Ready    master   8h      v1.15.0
-k8minion1   Ready    <none>   7h52m   v1.15.0
-k8minion2   Ready    <none>   7h53m   v1.15.0
+k8master    Ready    master   73m     v1.15.0
+k8minion1   Ready    <none>   41m     v1.15.0
+k8minion2   Ready    <none>   7m12s   v1.15.0
+```
+
+Also all pods should be running.
+```bash
+pi@k8master:~ $ kubectl get pods --all-namespaces
+NAMESPACE     NAME                               READY   STATUS    RESTARTS   AGE
+kube-system   coredns-5c98db65d4-4dwk2           1/1     Running   0          61m
+kube-system   coredns-5c98db65d4-h9c2j           1/1     Running   0          61m
+kube-system   etcd-k8master                      1/1     Running   0          73m
+kube-system   kube-apiserver-k8master            1/1     Running   2          72m
+kube-system   kube-controller-manager-k8master   1/1     Running   0          73m
+kube-system   kube-flannel-ds-arm-5mqtg          1/1     Running   0          5m51s
+kube-system   kube-flannel-ds-arm-6x6v4          1/1     Running   0          5m51s
+kube-system   kube-flannel-ds-arm-n42kf          1/1     Running   0          5m51s
+kube-system   kube-proxy-gspck                   1/1     Running   1          42m
+kube-system   kube-proxy-j8mxf                   1/1     Running   0          8m22s
+kube-system   kube-proxy-nln46                   1/1     Running   0          61m
+kube-system   kube-scheduler-k8master            1/1     Running   0          74m
 ```
 
 **Yaayy!** The Kubernetes Cluster is now ready to deploy some software!
 
 ## Cluster Software Deployment
 
+### Choose your Software
+
+Choose your software from dockerhub and get the right version from
+
+### Create a namespace
+Namespaces are resources to group together your application. If you may
+
 ### Create a Deployment
+
+Create a simple deployment with no additional settings and parameters.
+
+```bash
+k8s-1:~$ kubectl create deployment nginx --image=nginx --dry-run=true -o yaml
+```
+
+
+
 
 ### Create a Service
 

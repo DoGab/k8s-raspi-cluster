@@ -4,6 +4,7 @@ metadata:
   name: gollum
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+  namespace: wiki
 spec:
   rules:
   - host: wiki.gabnetwork.ch

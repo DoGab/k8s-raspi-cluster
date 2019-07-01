@@ -31,6 +31,29 @@ I used 3 Raspberry Pis for the setup of my Kubernetes Cluster.
   * Configure the raspberry pis according to your needs.
 * Static IP address (use `/etc/dhcpd.conf`)
 
+#### Workaround
+Since docker isn't available for raspbian buster yet you can't use that release. Either you wait until docker is avaialable or you follow this workaround.
+1. Flash your sd card with the latest version `raspbian stretch`.
+2. Update the kernel with the latest unstable version. Run `sudo rpi-update` and reboot the raspberry pi afterwards.
+3. Check that the kernel version is newer than `4.19.46-v7+`.
+```bash
+pi@k8minion1:~ $ uname -a
+Linux k8minion1 4.19.56-v7+ #1242 SMP Wed Jun 26 17:31:47 BST 2019 armv7l GNU/Linux
+```
+3. Check if the `pids` cgroup is available with `cat /proc/cgroups`.
+```bash
+pi@k8minion1:~ $ cat /proc/cgroups
+#subsys_name	hierarchy	num_cgroups	enabled
+cpuset	7	20	1
+cpu	6	94	1
+cpuacct	6	94	1
+blkio	5	94	1
+memory	4	129	1
+devices	3	94	1
+freezer	9	20	1
+net_cls	8	20	1
+pids	2	99	1
+```
 
 ## Cluster Setup
 ### Kubernetes Prerequisites
@@ -164,27 +187,3 @@ kube-system   kube-scheduler-k8master            1/1     Running   0          74
 ```
 
 **Yaayy!** The Kubernetes Cluster is now ready to deploy some software!
-
-## Cluster Software Deployment
-
-### Choose your Software
-
-Choose your software from dockerhub and get the right version from
-
-### Create a namespace
-Namespaces are resources to group together your application. If you may
-
-### Create a Deployment
-
-Create a simple deployment with no additional settings and parameters.
-
-```bash
-k8s-1:~$ kubectl create deployment nginx --image=nginx --dry-run=true -o yaml
-```
-
-
-
-
-### Create a Service
-
-### Create an Ingress

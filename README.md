@@ -40,7 +40,7 @@ Since docker isn't available for raspbian buster yet you can't use that release.
 pi@k8minion1:~ $ uname -a
 Linux k8minion1 4.19.56-v7+ #1242 SMP Wed Jun 26 17:31:47 BST 2019 armv7l GNU/Linux
 ```
-3. Check if the `pids` cgroup is available with `cat /proc/cgroups`.
+4. Check if the `pids` cgroup is available with `cat /proc/cgroups`.
 ```bash
 pi@k8minion1:~ $ cat /proc/cgroups
 #subsys_name	hierarchy	num_cgroups	enabled
@@ -54,6 +54,7 @@ freezer	9	20	1
 net_cls	8	20	1
 pids	2	99	1
 ```
+5. Follow the instructions in the cluster setup part.
 
 ## Cluster Setup
 ### Kubernetes Prerequisites
@@ -91,6 +92,7 @@ Execute the script to install all prerequisites to install and run Kubernetes.
 ```bash
 pi@k8master:~ $ sh install-k8-prereq.sh
 ```
+After the script has finished, reboot the raspberry pi.
 
 ### Initialize Kubernetes master
 Run

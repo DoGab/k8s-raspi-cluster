@@ -37,7 +37,7 @@ I used 3 Raspberry Pis for the setup of my Kubernetes Cluster.
 
 #### Workaround
 Since docker isn't available for raspbian buster yet you can't use that release. Either you wait until docker is avaialable or you follow this workaround.
-1. Flash your sd card with the latest version `raspbian stretch`.
+1. Flash your sd card with the latest version `raspbian stretch`. Get it [here](http://downloads.raspberrypi.org/raspbian/images/)
 2. Update the kernel with the latest unstable version. Run `sudo rpi-update` and reboot the raspberry pi afterwards.
 3. Check that the kernel version is newer than `4.19.46-v7+`.
 ```bash

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: gollum
+  name: gollum
+  namespace: wiki
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gollum
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: gollum
+    spec:
+      containers:
+      - image: dogab/docker-gollum:v1
+        name: docker-gollum
+        resources: {}
+        volumeMounts:
+        - mountPath: "/root/wikidata"
+          name: mypd
+      volumes:
+      - name: mypd
+        persistentVolumeClaim:
+          claimName: wikistorage-claim
+status: {}

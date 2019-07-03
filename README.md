@@ -4,7 +4,7 @@
 1. [Prerequisites](#prerequisites)
   * [Hardware](#hardware)
   * [Raspberry Pi Configuration](#raspberry-pi-configuration)
-2. [Cluster Setup](#setup)
+2. [Cluster Setup](#cluster-setup)
   * [Kubernetes Prerequisites](#kubernetes-prerequisites)
   * [Initialize Kubernetes master](#initialize-kubernetes-master)
   * [Install worker nodes](#install-worker-nodes)
